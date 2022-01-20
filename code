@@ -7,7 +7,11 @@ static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
   
 year -= month < 3;
   
-return (year + year / 4 -year / 100 +year / 400 +t[month - 1] + day) %7;
+return (year 
+       + year / 4 
+       -year / 100 
+       +year / 400 
+       +t[month - 1] + day) %7;
 
 }
 
@@ -84,9 +88,7 @@ return (31);
   
     // February
     if (monthNumber == 1)
-    { if (year % 400 == 0 
-        ||(year % 4 == 0 
-        &&year % 100 != 0))
+    { if (year % 400 == 0 ||(year % 4 == 0 && year % 100 != 0))
         return (29);
       else
 	    return (28);}
@@ -133,35 +135,57 @@ return (31);
 
 }
 
- 
+ void purple () {
+  printf("\033[1;35m");
+}
+
+void yellow () {
+  printf("\033[0;33m");
+}
+
+void red () {
+  printf("\033[1;31m");
+}
+
+void cyan () {
+  printf("\033[1;36m");
+}
+
+void reset () {
+  printf("\033[0m");
+}
+
 int main () 
 {
 int year;
 printf("Enter Year: ");
 scanf("%d",&year);
-printf ("\n\n          CALENDAR %d\n\n", year);
-  
-int days;
+purple();
+printf ("\n\n.        CALENDAR for %d        .\n\n", year);
+reset();
  
+int days; 
 int current = dayNumber (1, 1, year);
   
- 
 for (int i = 0; i < 12; i++)
     { days = numberOfDays (i, year);
-printf ("\n -------------%s--------------\n", 
-getMonthName (i));
-      
+yellow();
+printf ("\n -------------%s--------------\n",getMonthName (i));
+reset();
+     
+red();
 printf (" Sun   Mon  Tue  Wed  Thu  Fri  Sat\n");
+reset();
 
 int k;
-
 for (k = 0; k < current; k++)
 printf ("     ");
       
- 
 for (int j = 1; j <= days; j++)	
 {
+cyan();
 printf ("%5d", j);
+reset();
  
 if (++k > 6)
 	    {
@@ -177,3 +201,10 @@ current = k;
 return 0;
 
 }
+
+
+
+
+
+
+
